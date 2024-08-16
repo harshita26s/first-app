@@ -1,9 +1,11 @@
 const express = require("express");
-const fs = require('fs')
-// const mongoose = require("mongoose");
 
-const
-const userRouter = require("./routes/user")
+// const mongoose = require("mongoose");
+const {connectMongoDb} = require('./connection');
+
+const userRouter = require("./routes/user");
+
+const {logReqRes} = require("./middlewares");
 
 // const users = require("./MOCK_DATA.json");
 // const { log } = require("console");
@@ -13,24 +15,17 @@ const app = express();
 const PORT = 3000;
 
 // connection
-
+connectMongoDb(" mongodb://127.0.0.1:27017/mongodb-practise").then(
+    console.log("Mongodb connected!")
+);
 
 // Middleware - plugin 
 app.use(express.urlencoded({ extended: false }));
-
-app.use((req, res, next) => {
+app.use(logReqRes("log.txt"));
     // console.log("Hello from middleware 1");
     // // return res.json({ mgs: "Hello from middleware 1" });
     // next();
-    fs.appendFile(
-        "log.txt",
-        `\n${Date.now()}:${req.ip} ${req.method}: ${req.path}\n`, (err, data) => {
-           next();
-        }
-    );
-
-});
-
+   
 
 // app.use((req, res, next) => {
 //     console.log("Hello from middleware 2");
