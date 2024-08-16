@@ -1,0 +1,6 @@
+1723486862178: GET: /api/users
+1723486930282: GET: /api/users/
+1021723487028919: POST: /api/users
+1723487123441: POST: /api/users
+1723487164176: GET: /api/users
+1723487215031: GET: /api/users/101
